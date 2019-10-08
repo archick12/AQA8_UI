@@ -48,12 +48,12 @@ public class JIRATest {
   @Test
   public void createIssue() throws InterruptedException {
     this.driver.get("https://jira.hillel.it/login.jsp");
-    driver.findElement(userNameInput).sendKeys("webinar5");
-    driver.findElement(passwordInput).sendKeys("webinar5");
-    driver.findElement(loginButton).click();
+    enterText(userNameInput, "webinar5", 3, 10);
+    enterText(passwordInput, "webinar5", 3, 10);
+    click(loginButton, 3, 10);
     Assert.assertEquals(driver.getCurrentUrl(), "https://jira.hillel.it/secure/Dashboard.jspa");
 
-    waitFor(createIssueButton, 3, 10).click();
+    click(createIssueButton, 3, 10);
 
     enterText(projectInput, "QAAUTO-8", 3, 10);
     enterText(issueTypeInput, "Test", 3, 10);
@@ -73,11 +73,11 @@ public class JIRATest {
   }
 
   /*
-  * Такой подход лучше чем ничего, но все равно приведет к исключительным ситуациям.
-  * Пробема тут, что избежав исключительную ситуцию при поиске элемента, мы вовсе не обезопасили себя
-  * от исключения при попытке взаимодействовать с элементом.
-  * Для решения этой проблемы ознакомьтесь со следующим после этого метода методом.
-  * */
+   * Такой подход лучше чем ничего, но все равно приведет к исключительным ситуациям.
+   * Пробема тут, что избежав исключительную ситуцию при поиске элемента, мы вовсе не обезопасили себя
+   * от исключения при попытке взаимодействовать с элементом.
+   * Для решения этой проблемы ознакомьтесь со следующим после этого метода методом.
+   * */
   private WebElement waitFor(By element, int retry, int timeoutSeconds) {
     for (int i = retry; i > 0; i--) {
       try {
@@ -96,18 +96,38 @@ public class JIRATest {
     return driver.findElement(element);
   }
 
+  private void click(By element, int retry, int timeoutSeconds) {
+    for (int i = retry; i > 0; i--) {
+      try {
+        System.out.println("Searching element" + element.toString() + ". Retry - " + (retry - i));
+        driver.findElement(element).click();
+        break;
+      } catch (NoSuchElementException | StaleElementReferenceException | ElementNotInteractableException ex) {
+        try {
+          System.out.println("Searching element" + element.toString() + ". Retry - " + (retry - i));
+          Thread.sleep(TimeUnit.SECONDS.toMillis(timeoutSeconds));
+          driver.findElement(element).click();
+          break;
+        } catch (NoSuchElementException | StaleElementReferenceException | ElementNotInteractableException | InterruptedException ex2) {
+          continue;
+        }
+      }
+    }
+  }
+
   private void enterText(By element, String text, int retry, int timeoutSeconds) {
     for (int i = retry; i > 0; i--) {
       try {
-        driver.findElement(element).sendKeys(text);
         System.out.println("Searching element" + element.toString() + ". Retry - " + (retry - i));
-      } catch (Exception ex) {
+        driver.findElement(element).sendKeys(text);
+        break;
+      } catch (NoSuchElementException | StaleElementReferenceException | ElementNotInteractableException ex) {
         try {
           System.out.println("Searching element" + element.toString() + ". Retry - " + (retry - i));
           Thread.sleep(TimeUnit.SECONDS.toMillis(timeoutSeconds));
           driver.findElement(element).sendKeys(text);
-        } catch (Exception ex2) {
-          System.out.println("Searching element" + element.toString() + ". Retry - " + (retry - i));
+          break;
+        } catch (NoSuchElementException | StaleElementReferenceException | ElementNotInteractableException | InterruptedException ex2) {
           continue;
         }
       }
