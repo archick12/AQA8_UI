@@ -3,10 +3,9 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class NewIssuePage extends BasePage {
+public class NewIssuePage {
 
     WebDriver driver;
-
     CommonActions commonActions;
 
     // Create Issue
