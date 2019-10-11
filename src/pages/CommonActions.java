@@ -12,6 +12,12 @@ public class CommonActions {
     }
 
     protected void click(By element, int retry, int timeoutSeconds) {
+        // TODO workaround for strange glitch - we use ID selector, but see that selenium used CSS selector
+        try {
+            Thread.sleep(TimeUnit.SECONDS.toMillis(1));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         for (int i = retry; i > 0; i--) {
             try {
                 System.out.println("Searching element" + element.toString() + ". Retry - " + (retry - i));
@@ -24,13 +30,27 @@ public class CommonActions {
                     driver.findElement(element).click();
                     break;
                 } catch (NoSuchElementException | StaleElementReferenceException | ElementNotInteractableException | InterruptedException ex2) {
-                    continue;
+                    if(i == 0){
+                      try {
+                        throw new Exception("Failed to find element " + element.toString());
+                      } catch (Exception e) {
+                        e.printStackTrace();
+                      }
+                    }
+                  continue;
                 }
             }
         }
+
     }
 
     protected void enterText(By element, String text, int retry, int timeoutSeconds) {
+      // TODO workaround for strange glitch - we use ID selector, but see that selenium used CSS selector
+      try {
+        Thread.sleep(TimeUnit.SECONDS.toMillis(1));
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
         for (int i = retry; i > 0; i--) {
             try {
                 System.out.println("Searching element" + element.toString() + ". Retry - " + (retry - i));
@@ -43,7 +63,14 @@ public class CommonActions {
                     driver.findElement(element).sendKeys(text);
                     break;
                 } catch (NoSuchElementException | StaleElementReferenceException | ElementNotInteractableException | InterruptedException ex2) {
-                    continue;
+                  if(i == 0){
+                    try {
+                      throw new Exception("Failed to find element " + element.toString());
+                    } catch (Exception e) {
+                      e.printStackTrace();
+                    }
+                  }
+                  continue;
                 }
             }
         }

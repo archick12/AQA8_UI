@@ -16,7 +16,7 @@ public class JIRATest {
 
     @BeforeTest
     public void setUp() {
-        WebDriverManager.chromedriver().setup();
+        WebDriverManager.chromedriver().version("77.0.3865.40").setup();
         // Create a new instance of the Firefox driver
         this.driver = new ChromeDriver();
     }
@@ -38,12 +38,13 @@ public class JIRATest {
         Assert.assertEquals(driver.getCurrentUrl(), "https://jira.hillel.it/secure/Dashboard.jspa");
 
         NewIssuePage newIssuePage = new NewIssuePage(driver);
-        newIssuePage.clickCreateIssue();
+        newIssuePage.clickCreateNewIssueButton();
         newIssuePage.enterProjectName("QAAUT-8");
         newIssuePage.enterIssueType("Test");
         newIssuePage.enterIssueSummary("Some Summary");
         newIssuePage.enterIssueDescription("Some Desc");
-        newIssuePage.clickCreateNewIssueButton();
+        newIssuePage.clickCreateIssue();
+
     }
 
     @AfterTest
