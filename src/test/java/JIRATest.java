@@ -8,17 +8,7 @@ import org.testng.annotations.Test;
 import pages.LoginPage;
 import pages.NewIssuePage;
 
-public class JIRATest {
-
-    WebDriver driver;
-
-    @BeforeTest
-    public void setUp() {
-        WebDriverManager.chromedriver().version("77.0.3865.40").setup();
-        // Create a new instance of the Firefox driver
-        this.driver = new ChromeDriver();
-    }
-
+public class JIRATest extends BaseTest {
 
     @Test
     public void loginTest() {
@@ -44,12 +34,4 @@ public class JIRATest {
         newIssuePage.clickCreateIssue();
 
     }
-
-    @AfterTest
-    public void tearDown() {
-        // Close the driver
-        this.driver.quit();
     }
-
-
-}

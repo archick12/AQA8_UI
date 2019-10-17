@@ -2,7 +2,8 @@ package pages;
 
 interface PagesURLs {
 
-  static String base = "https://jira.hillel.it";
-  static String loginPage = base + "/login.jsp";
+  // Поля в интерфейсе static final - константы
+  String base = "https://jira.hillel.it";
+  String loginPage = base + "/login.jsp";
 
 }
