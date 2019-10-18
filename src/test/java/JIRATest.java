@@ -1,4 +1,5 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Feature;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -10,6 +11,7 @@ import pages.NewIssuePage;
 
 public class JIRATest extends BaseTest {
 
+    @Feature("Login")
     @Test
     public void loginTest() {
         LoginPage loginPage = new LoginPage(driver);
@@ -18,6 +20,7 @@ public class JIRATest extends BaseTest {
         Assert.assertEquals(driver.getCurrentUrl(), "https://jira.hillel.it/secure/Dashboard.jspa");
     }
 
+    @Feature("Issue")
     @Test
     public void createIssue() throws InterruptedException {
         LoginPage loginPage = new LoginPage(driver);

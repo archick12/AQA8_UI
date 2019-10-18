@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Parallel test suite" >
+    <test name="Issue">
+        <classes>
+            <class name="JIRATest"/>
+        </classes>
+    </test>
+</suite>
