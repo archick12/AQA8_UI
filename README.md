@@ -64,8 +64,7 @@
     </test>
 </suite>
 ```
-- обновить тест
-- добавить @Feature
+- обновить тест - добавить @Feature
 ##### 2. установить Allure CLI
 ```
 https://docs.qameta.io/allure/#_installing_a_commandline
@@ -73,5 +72,5 @@ https://docs.qameta.io/allure/#_installing_a_commandline
 ##### 3. запустить тесты 
 ```mvn clean test```
 ##### 4. выполнить в корне проекта консольную команду и получить отчет
-    `allure generate`
+    ```allure generate```
 В помощь - `https://www.swtestacademy.com/allure-testng/`
