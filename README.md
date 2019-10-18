@@ -73,4 +73,25 @@ https://docs.qameta.io/allure/#_installing_a_commandline
 ```mvn clean test```
 ##### 4. выполнить в корне проекта консольную команду и получить отчет
     ```allure generate```
+Отчет будет в корне проекта в папке "allure-report" 
+
 В помощь - `https://www.swtestacademy.com/allure-testng/`
+
+#### Алгоритм для добавления групп @smoke, @regression
+##### 1. определить группы в TestNG.xml
+```
+<groups>
+    <run>
+        <include name="Regression"/>
+        <exclude name="SKIP"/>
+    </run>
+</groups>
+```
+##### 2. добавить группу в тест
+```
+@Test(groups = {"Regression", "SKIP"})
+```
+##### 3. добавить группу в @BeforeTest @AfterTest
+```
+@BeforeTest(groups = "Regression")
+```

@@ -8,14 +8,14 @@ public class BaseTest {
 
     WebDriver driver;
 
-    @BeforeTest
+    @BeforeTest(groups = "Regression")
     public void setUp() {
         WebDriverManager.chromedriver().version("77.0.3865.40").setup();
         // Create a new instance of the Firefox driver
         this.driver = new ChromeDriver();
     }
 
-    @AfterTest
+    @AfterTest(groups = "Regression")
     public void tearDown() {
         // Close the driver
         this.driver.quit();

@@ -12,7 +12,7 @@ import pages.NewIssuePage;
 public class JIRATest extends BaseTest {
 
     @Feature("Login")
-    @Test
+    @Test(groups = {"Regression"})
     public void loginTest() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.navigate();
@@ -21,7 +21,7 @@ public class JIRATest extends BaseTest {
     }
 
     @Feature("Issue")
-    @Test
+    @Test(groups = {"Regression", "SKIP"})
     public void createIssue() throws InterruptedException {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.navigate();
@@ -37,4 +37,11 @@ public class JIRATest extends BaseTest {
         newIssuePage.clickCreateIssue();
 
     }
+
+    @Feature("Issue")
+    @Test(groups = {"Regression", "SKIP"})
+    public void testToBeSkipped() throws InterruptedException {
+
     }
+}
+

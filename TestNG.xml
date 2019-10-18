@@ -1,6 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Parallel test suite" >
     <test name="Issue">
+        <groups>
+            <run>
+                <include name="Regression"/>
+                <exclude name="SKIP"/>
+            </run>
+        </groups>
         <classes>
             <class name="JIRATest"/>
         </classes>
