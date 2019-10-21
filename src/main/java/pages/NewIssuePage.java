@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import utils.WebDriverFactory;
 
 public class NewIssuePage {
 
@@ -19,8 +20,8 @@ public class NewIssuePage {
     private By issueSuccessfullyCreated = By.xpath("//div[@class='aui-message closeable aui-message-success aui-will-close']");
 
 
-    public NewIssuePage(WebDriver driver) {
-        this.driver = driver;
+    public NewIssuePage() {
+        this.driver = WebDriverFactory.getDriver();
         commonActions = new CommonActions(driver);
     }
 

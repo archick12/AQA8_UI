@@ -77,7 +77,7 @@ https://docs.qameta.io/allure/#_installing_a_commandline
 
 В помощь - `https://www.swtestacademy.com/allure-testng/`
 
-#### Алгоритм для добавления групп @smoke, @regression
+#### Как добавить группу @smoke, @regression?
 ##### 1. определить группы в TestNG.xml
 ```
 <groups>
