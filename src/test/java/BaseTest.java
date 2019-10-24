@@ -9,6 +9,8 @@ public class BaseTest {
 
   @BeforeTest(groups = "Regression")
   public void setUp() {
+    // create 100 users
+    // grant permissions
     WebDriverFactory.createInstance("Chrome");
   }
 

@@ -18,6 +18,7 @@ public class LoginPage {
   private By wrongPasswordLabel = By.xpath("//div[@class='aui-message aui-message-error']");
 
   public LoginPage() {
+      // Выполняется самым первым
     this.driver = WebDriverFactory.getDriver();
   }
 
