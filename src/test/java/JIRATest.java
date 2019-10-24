@@ -14,7 +14,7 @@ public class JIRATest extends BaseTest {
     loginPage.navigate();
     loginPage.loginToJira("webinar5", "webinar5");
     Assert.assertEquals(WebDriverFactory.getDriver().getCurrentUrl(), "https://jira.hillel.it/secure/Dashboard.jspa");
-    Assert.assertTrue(1 == 2);
+    Assert.assertTrue(1 == 1);
   }
 
   @Feature("Issue")

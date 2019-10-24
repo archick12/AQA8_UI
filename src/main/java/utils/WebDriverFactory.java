@@ -8,18 +8,18 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class WebDriverFactory {
-  private static final ThreadLocal<WebDriver> webDriver = new ThreadLocal<WebDriver>();
+  private static WebDriver webDriver;
 
   public static WebDriver getDriver() {
-    return webDriver.get();
+    return webDriver;
   }
 
   public static void setWebDriver(WebDriver driver) {
-    webDriver.set(driver);
+    webDriver = driver;
   }
 
   public static void closeDriver() {
-    webDriver.get().quit();
+    webDriver.quit();
   }
 
   public static void createInstance(String browserName) {
@@ -41,7 +41,7 @@ public class WebDriverFactory {
     }
 
     driver.manage().window().maximize();
-    webDriver.set(driver);
+    webDriver = driver;
   }
 
 }

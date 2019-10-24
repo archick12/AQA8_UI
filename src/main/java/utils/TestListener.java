@@ -12,10 +12,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class TestListener implements ITestListener {
-
   @Override
   public void onTestStart(ITestResult iTestResult) {
 
@@ -28,7 +28,10 @@ public class TestListener implements ITestListener {
 
   @Override
   public void onTestFailure(ITestResult iTestResult) {
-    try (InputStream is = Files.newInputStream(Paths.get(captureScreenshot().getPath()))) {
+    File screenshot = captureScreenshot();
+    Path pathToScreenShot = Paths.get(screenshot.getPath());
+
+    try (InputStream is = Files.newInputStream(pathToScreenShot)) {
       Allure.addAttachment("Screenshot", is);
     } catch (IOException e) {
       e.printStackTrace();
@@ -56,8 +59,8 @@ public class TestListener implements ITestListener {
 
   }
 
-  @Attachment
   public File captureScreenshot() {
     return ((TakesScreenshot) WebDriverFactory.getDriver()).getScreenshotAs(OutputType.FILE);
   }
+
 }
