@@ -1,5 +1,6 @@
 import io.qameta.allure.Feature;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import pages.NewIssuePage;
@@ -39,6 +40,20 @@ public class JIRATest extends BaseTest {
   @Test(groups = {"Regression", "SKIP"})
   public void testToBeSkipped() throws InterruptedException {
 
+  }
+
+  @Feature("Login")
+  @Test(groups = {"Regression"}, dataProvider = "data-provider")
+  public void dataProviderTest(String parameter) {
+    System.out.println(parameter);
+  }
+
+  @DataProvider(name = "data-provider")
+  public Object[][] dataProviderData() {
+    return new Object[][]{
+        {"The first value"},
+        {"The second value"}
+    };
   }
 }
 
